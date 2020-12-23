@@ -71,5 +71,31 @@
     },
     "mp-qq" : {
         "usingComponents" : true
-    }
+    },
+	"h5" : {
+		"router" : {
+			"mode" : "hash"
+		},
+		"sdkConfigs" : {
+			"maps" : {
+				"qqmap" : {
+					"key" : ""
+				}
+			}
+		},
+		"devServer" : {
+			"disableHostCheck" : true,
+			"port" : 80,
+			"proxy" : {
+				"/": {
+					"target": "http://39.106.28.140:11100/zrmc/",
+					"angeOrigin": true,
+					"security": true,
+					"pathRewrite" : {
+						"^/api" : "/"
+					}
+				}
+			}
+		}
+	}
 }

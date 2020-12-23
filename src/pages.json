@@ -1,8 +1,8 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index"
-		}
+		{"path": "pages/index/index"},
+		{"path": "pages/mycenter/index"},
+		{"path": "pages/eyeSelfTest/index"}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
@@ -10,5 +10,31 @@
 		"navigationBarBackgroundColor": "#00adaf",
 		"backgroundColor": "#F8F8F8",
 		"align": "left"
+	},
+	"tabBar": {
+		"color": "#C0C4CC",
+		"selectedColor": "#03696a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "/static/CC_76.png",
+				"selectedIconPath": "/static/CC_74.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/eyeSelfTest/index",
+				"iconPath": "/static/CC_79.png",
+				"selectedIconPath": "/static/CC_71.png",
+				"text": "干眼自测"
+			},
+			{
+				"pagePath": "pages/mycenter/index",
+				"iconPath": "/static/my_1_78.png",
+				"selectedIconPath": "/static/my_1_82.png",
+				"text": "我的"
+			}
+		]
 	}
 }
