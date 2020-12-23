@@ -1,95 +1,117 @@
 <template>
 	<view class="content">
-		<view>
-			<image class="padding_top_bottom_10" mode="widthFix" src="~@/static/CC_10.png"></image>
-		</view>
-		<view>
-			<swiper
-					:style="{width: width + 'px'}"
-					class="swiper"
-					:indicator-dots="indicatorDots"
-					indicator-color="white"
-					indicator-active-color="#00adaf"
-					:autoplay="autoplay"
-					:interval="interval"
-					:duration="duration">
-				<swiper-item>
-					<image class="ele_center" mode="aspectFit" src="~@/static/CC_13.jpg"></image>
-				</swiper-item>
-				<swiper-item>
-					<image class="ele_center" mode="aspectFit" src="~@/static/CC_13.jpg"></image>
-				</swiper-item>
-				<swiper-item>
-					<image class="ele_center" mode="aspectFit" src="~@/static/CC_13.jpg"></image>
-				</swiper-item>
-			</swiper>
-		</view>
-		<view class="uni-flex padding_top_bottom_10">
-			<view class="uni-flex-item" style="width: 150px">
-				<image class="image_view ele_center" style="width: 80px;height:80px;" src="~@/static/CC_23.png"></image>
+		<view class="bottom_view">
+			<view class="content_view">
+				<view class="name_1">自测地点：</view>
+				<view class="name_button">
+					<view class="button_view" :class="current === 0 ? 'activeButton' : ''" @click="setStyle(0)">到院自测</view>
+					<view class="button_view" :class="current === 1 ? 'activeButton' : ''" @click="setStyle(1)">居家自测</view>
+				</view>
 			</view>
-			<view class="uni-flex-item">
-				<view v-for="(i, d) in message" :key="d" class="list_view">
-					<view class="status_view" v-if="!(d%2)"></view>
-					<view class="title">{{i.title}}</view>
-					<view class="content">{{i.content}}</view>
+			<view class="content_view">
+				<view class="name_1">自测时间：</view>
+				<view class="name_button">
+					<view class="time_view">{{returnTimes()}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="top_view">
-			<view class="qz"></view>
-			<view class="title_view2">日常预治小知识</view>
-		</view>
-		<view class="bottom_view">
-			<view class="content_view" v-for="(item, index) in content" :key="index">
-				<view class="circle"></view>
-				<view class="title_view3">{{item}}</view>
+		<view v-for="(item, index) in data" :key="'data' + index">
+			<view class="top_view_2">
+				<view class="qz"></view>
+				<view class="title_view2">{{item.t1}}</view>
+				<view class="title_view3">{{item.t2}}</view>
+			</view>
+			<view class="bottom_view_2">
+				<table class="table_view">
+					<tr><!--tr 代表一行-->
+						<th v-for="(item1, index1) in item.th" :key="'th' + index1">{{item1.name}}</th>
+					</tr>
+					<tr v-for="(item2, index2) in item.tr" :key="'tr' + index2">
+						<th scope="row">{{item2.name}}</th>
+						<td v-for="item3 in item.th.length - 1" :key="'td' + item3">
+							<checkbox></checkbox>
+						</td>
+					</tr>
+				</table>
 			</view>
 		</view>
+		<view class="submit_view">提 交</view>
+		<view style="margin-bottom: 10px;"></view>
 	</view>
 </template>
 
 <script>
+	import {getCurrentTime} from '@/utils'
 	export default {
 		data() {
 			return {
-				message: [
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊进行复诊复诊'},
-					{title: '日常护理', content: '要御寒保暖，保护身体，免受免受'},
-					{title: '日常护理', content: '洗脸时注意眼睑及睫毛之清洁，用，用'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '日常护理', content: '洗脸时注意眼睑及睫毛之清洁，用，用'}
-				],
-				content: [
-						'老花镜不能随便在路边买，和近视眼镜一样，要验光验配？',
-						'做了近视手术后，就不能再做其他的眼睛手术了？',
-						'角膜太薄，做不了近视激光手术，只能戴眼镜？',
-						'得糖尿病久了，可能会失明？',
-						'角膜移植和其他器官一样需要配对吗？',
-						'散光只能戴眼镜，不能做手术矫正？',
-					'老花镜不能随便在路边买，和近视眼镜一样，要验光验配？',
-					'做了近视手术后，就不能再做其他的眼睛手术了？',
-					'角膜太薄，做不了近视激光手术，只能戴眼镜？',
-					'得糖尿病久了，可能会失明？',
-					'角膜移植和其他器官一样需要配对吗？',
-					'散光只能戴眼镜，不能做手术矫正？'
-				],
-				width: 0,
-				indicatorDots: true,
-				autoplay: true,
-				interval: 2000,
-				duration: 500
+				current: 0,
+				data: [
+					{
+						t1: '眼部症状',
+						t2: '过去一周内眼睛是否感受到以下不适？',
+						th: [
+							{id: 0, name: ''},
+							{id: 1, name: '全部时间'},
+							{id: 1, name: '大部分时间'},
+							{id: 1, name: '一半时间'},
+							{id: 1, name: '少部分时间'},
+							{id: 1, name: '无'}
+						],
+						tr: [
+							{id: 1, name: '对光敏感'},
+							{id: 1, name: '感觉眼镜像进了沙子一样'},
+							{id: 1, name: '眼睛疼痛'}
+						]
+					},
+					{
+						t1: '视觉功能',
+						t2: '过去一周内眼睛是否感受到以下不适？',
+						th: [
+							{id: 0, name: ''},
+							{id: 1, name: '全部时间'},
+							{id: 1, name: '大部分时间'},
+							{id: 1, name: '一半时间'},
+							{id: 1, name: '少部分时间'},
+							{id: 1, name: '无'}
+						],
+						tr: [
+							{id: 1, name: '视力波动'},
+							{id: 2, name: '视力差，看不清'},
+							{id: 3, name: '读书、写字'},
+							{id: 4, name: '夜间驾驶'},
+							{id: 5, name: '玩电脑、游戏机'},
+							{id: 6, name: '看电视'}
+						]
+					},
+					{
+						t1: '环境触发因素',
+						t2: '过去一周内，眼睛在以下环境中是否感到不适？',
+						th: [
+							{id: 0, name: ''},
+							{id: 1, name: '全部时间'},
+							{id: 1, name: '大部分时间'},
+							{id: 1, name: '一半时间'},
+							{id: 1, name: '少部分时间'},
+							{id: 1, name: '无'}
+						],
+						tr: [
+							{id: 1, name: '刮风'},
+							{id: 2, name: '在非常干燥的环境里'},
+							{id: 3, name: '在开空调的房间'}
+						]
+					}
+				]
 			}
 		},
 		onLoad() {
-			this.width = document.body.clientWidth
 		},
 		methods: {
-			computedWidth (px) {
-				return `calc(${this.width}px - ${px})`
+			returnTimes () {
+				return `${getCurrentTime('all')}`
+			},
+			setStyle (current) {
+				this.current = current
 			}
 		}
 	}
@@ -97,65 +119,49 @@
 
 <style lang="less" scoped>
 	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		.swiper{
-			height: 90px;
-			/deep/.uni-swiper-dot-active{
-				border: 2px solid white;
-			}
-		}
-		.uni-flex{
+		.bottom_view{
 			display: flex;
-			width: 92%;
-			.uni-flex-item{
-				width: 100%;
-				height: 120px;
-				overflow: auto;
-				.image_view{
+			width: 100%;
+			.content_view{
+				padding: 0 10px;
+				width: 50%;
+				.name_1{
+					font-size: 16px;
+					padding: 5px;
 				}
-				.list_view{
-					font-size: 15px;
+				.name_button{
 					display: flex;
-					margin: 5px 0 5px 10px;
-					position: relative;
-					.status_view{
-						width: 10px;
-						height: 10px;
-						border-radius: 100%;
-						background: red;
-						position: absolute;
-						left: -2.5px;
-						top: -2.5px;
-					}
-					.title{
-						width: 80px;
-						background: #00adaf;
-						color: white;
+					.button_view{
+						font-size: 15px;
+						font-weight: bold;
+						background: rgba(0, 0, 0, .1);
+						width: 50%;
+						color: rgba(0, 0, 0, .5);
+						padding: 5px 10px;
 						text-align: center;
-						border-radius: 5px;
-						padding: 2px 0;
+						margin: 5px;
+						border: none;
+						border-radius: 20px;
 					}
-					.content{
-						margin-left: 5px;
-						position: relative;
-						width: 70%;
-						display: inline !important;
-						align-items: normal !important;
-						white-space:nowrap;
-						overflow:hidden;
-						text-overflow:ellipsis;
+					.activeButton{
+						background: #c7f6f7;
+						color: #00adaf;
+					}
+					.time_view{
+						font-size: 15px;
+						color: #00adaf;
+						padding: 5px 0;
+						text-align: left;
+						margin: 5px 0;
 					}
 				}
 			}
 		}
-		.top_view{
-			margin-top: 10px;
-			border-bottom: 1px solid #00adaf;
+		.top_view_2{
+			margin: 20px 20px 0 20px;
 			padding-bottom: 15px;
 			width: 90%;
+			border-bottom: 1px solid #2cbcbe;
 			.qz{
 				background: #00adaf;
 				width: 4px;
@@ -172,37 +178,55 @@
 				font-size: 16px;
 				margin-left: 15px;
 			}
+			.title_view3{
+				display: inline-block;
+				color: #00adaf;
+				font-weight: bold;
+				font-size: 13px;
+				margin-left: 15px;
+			}
 		}
-		.bottom_view{
-			padding: 5px 20px;
-			width: 90%;
-			overflow: auto;
-			margin-bottom: 10px;
-			.content_view{
-				padding: 15px 0;
-				display: flex;
-				width: 100%;
-				position: relative;
-				border-bottom: 1px solid rgba(0, 0, 0, .1);
-				.circle{
-					background: #00adaf;
-					width: 10px;
-					height:10px;
-					border-radius: 2px;
-					display: inline-block;
-					position: relative;
+		.bottom_view_2{
+			.table_view{
+				margin: auto;
+				width: 90%;
+				font-size: 15px;
+				color: rgba(0, 0, 0, .5);
+				background: #ebffff;
+				border-collapse: collapse;
+				th{
+					border: 1px solid rgba(0, 0, 0, .1);
+					padding: 10px;
 				}
-				.title_view3{
-					width: 90%;
-					font-size: 15px;
-					position: relative;
-					white-space:nowrap;
-					overflow:hidden;
-					text-overflow:ellipsis;
-					margin-left: 10px;
-					margin-top: -5px;
+				tr{
+					border: 1px solid rgba(0, 0, 0, .1);
+				}
+				td{
+					border: 1px solid rgba(0, 0, 0, .1);
+					text-align: center;
+					/deep/.uni-checkbox-input{
+						border-radius: 100%;
+						width: 15px;
+						height: 15px;
+						color: #00adaf !important;
+						&::before{
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%) scale(1.3);
+						}
+					}
 				}
 			}
+		}
+		.submit_view{
+			text-align: center;
+			padding: 10px;
+			font-size: 15px;
+			border-radius: 20px;
+			margin: 20px;
+			color: white;
+			background: #00adaf;
 		}
 	}
 </style>
