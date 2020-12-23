@@ -1,0 +1,14 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "云南省干眼中心智能服务平台",
+		"navigationBarBackgroundColor": "#00adaf",
+		"backgroundColor": "#F8F8F8",
+		"align": "left"
+	}
+}
