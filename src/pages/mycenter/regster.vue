@@ -23,25 +23,28 @@
 			<view class="input_line"></view>
 			<view class="input-row border">
 				<text class="title">身份证号：</text>
-				<input type="text" focus clearable v-model="sufferIdCard" placeholder="请输入身份证号" />
+				<input type="text" focus clearable v-model="sufferIdCard" @input="checkIdCard" placeholder="请输入身份证号" />
 			</view>
 			<view class="input_line"></view>
 			<view class="input-row border">
 				<text class="title">手 机 号：</text>
-				<input type="text" focus clearable v-model="sufferPhone" placeholder="请输入手机号" />
+				<input type="text" focus clearable v-model="sufferPhone" @input="checkPhone" placeholder="请输入手机号" />
 			</view>
-			
+
 		</view>
 		<view class="btn-row">
 			<button class="cu-btn bg-green block lg" @click="register">确  定</button>
 			<button class="cu-btn bg-green block lg canuer" @tap="onreturn">取  消</button>
 		</view>
+		<my-custom-toast></my-custom-toast>
 	</view>
 </template>
 
 <script>
   import { regster } from '@/api/modules/api.js'
-	export default {
+  import { isPhone, verifyIdCards } from '@/utils/index.js'
+
+  export default {
 		data() {
 			return {
 				sufferName: '',
@@ -53,15 +56,37 @@
 				index: -1,
 			}
 		},
-    computed: {
+		computed: {
+			hintContent: {
+				get () {
+					return this.$store.state.hintContent
+				},
+				set (val) {
+					this.$store.commit('updateHintContent', val)
+				}
+			},
 			startDate() {
 				return this.getDate('start');
 			},
 			endDate() {
 				return this.getDate('end');
 			}
-    },
+    	},
 		methods: {
+			checkPhone(value) {
+				if (value.detail.value && !isPhone(value.detail.value)) {
+					this.hintContent = '手机号格式不正确'
+					return
+				}
+				this.hintContent = ''
+			},
+			checkIdCard(value) {
+				if (value.detail.value && !verifyIdCards(value.detail.value).code) {
+					this.hintContent = '身份证号码格式不正确'
+					return
+				}
+				this.hintContent = ''
+			},
 			async register () {
 				const { sufferName, sufferSex, sufferIdCard, sufferBirthday, sufferPhone } = this
 
@@ -108,13 +133,19 @@
 			width: 93%;
 			margin: 5px auto;
 			border: 1px solid #e5e5e5;
-			border-radius: 4px;
+			border-radius: 10px;
 			padding: 5px;
 			.input-row {
 				display: flex;
-				padding: 6px 8px;
+				padding: 20px 8px;
 				.title {
 					color: #0b8e90;
+					font-size: 16px;
+					font-weight: bold;
+					width: 30%;
+				}
+				input, uni-picker{
+					width: 70%;
 				}
 			}
 			.uni-input {
@@ -122,7 +153,9 @@
 				font-size: 16px;
 			}
 			.input_line {
-				border: 1px solid #e5e5e5;
+				border: 0.5px solid #e5e5e5;
+				width: 95%;
+				margin: auto;
 			}
 		}
 		.btn-row {
@@ -141,6 +174,6 @@
 				background: #aaaaaa;
 			}
 		}
-		
+
 	}
 </style>

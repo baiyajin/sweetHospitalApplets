@@ -7,7 +7,10 @@
 		{ "path": "pages/mycenter/login" },
 		{ "path": "pages/mycenter/manage" },
 		{ "path": "pages/webview/index" },
-		{ "path": "pages/eyeSelfTest/scop" }
+		{ "path": "pages/eyeSelfTest/scop" },
+		{ "path": "pages/mycenter/aboutSystem" },
+		{ "path": "pages/mycenter/notificationMessage" },
+		{ "path": "pages/mycenter/messageDetail" }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

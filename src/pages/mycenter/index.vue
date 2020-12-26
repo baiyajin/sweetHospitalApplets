@@ -10,7 +10,7 @@
                     <navigator open-type="navigate" url="/pages/mycenter/login">
                         <view class="uni-link-item">登录</view>
                     </navigator>
-                    <text>/</text>
+                    <text class="separator_text">/</text>
                     <navigator open-type="navigate" url="/pages/mycenter/regster">
                         <view class="uni-link-item">注册</view>
                     </navigator>
@@ -21,15 +21,18 @@
             </view>
             <view class="loginContent2">
                 <view class="loginContent2_div">
-                    <view class="conetns_left">
-                        <view class="conetns_left_img">
-                            <image style="width: 30px; height: 30px" src="~@/static/CC_43.png"></image>
+                    <navigator class="loginContent2_divNav" open-type="navigate" url="/pages/mycenter/aboutSystem">
+                        <view class="conetns_left">
+                            <view class="conetns_left_img">
+                                <image style="width: 30px; height: 30px" src="~@/static/CC_43.png"></image>
+                            </view>
+                            <view class="conetns_left_font">关于系统</view>
+
                         </view>
-                        <view class="conetns_left_font">关于系统</view>
-                    </view>
-                    <view class="conetns_right">
-                        <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
-                    </view>
+                        <view class="conetns_right">
+                            <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
+                        </view>
+                    </navigator>
                 </view>
             </view>
         </view>
@@ -40,9 +43,11 @@
                     <image src="~@/static/CC_55.png" style="width: 60px; height: 60px"></image >
                 </view>
                 <view class="erse">
-                    <view class="">{{ userinfo.sufferName }}</view>
-                    <view class="">{{ userinfo.sufferSex }} -岁</view>
-                </view>
+                                        <view class="UserName">{{ userinfo && userinfo.sufferName }}</view>
+                                        <view class="usersex">{{ userinfo && userinfo.sufferSex == 0 ? '男' : '女' }}</view>
+                                        <view class="usersex">{{ userinfo && userinfo.age }}岁</view>
+                                    </view>
+                 
                 <view class="erse margin_left_10 Certification">
                     <image style="width: 90px; height: 36px" src="~@/static/CC_38.png"></image>
                 </view>
@@ -53,51 +58,57 @@
             </view>
             <view class="loginContent2">
                 <view class="loginContent2_div" @tap="handManage">
-                    <view class="conetns_left"
-                    >
-                        <view class="conetns_left_img"
+                     <view class="loginContent2_divNav" >
+                        <view class="conetns_left"
                         >
-                            <image src="~@/static/CC_49.png" style="width: 30px; height: 30px;"></image>
+                            <view class="conetns_left_img"
+                            >
+                                <image src="~@/static/CC_49.png" style="width: 30px; height: 30px;"></image>
+                            </view>
+                            <view class="conetns_left_font">干眼管理</view>
+                        </view
+                        >
+                        <view class="conetns_right"
+                        >
+                            <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
                         </view>
-                        <view class="conetns_left_font">干眼管理</view>
-                    </view
-                    >
-                    <view class="conetns_right"
-                    >
-                        <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
-                    </view>
+                     </view>
                 </view>
                 <view class="loginContent2_div-line"></view>
                 <view class="loginContent2_div">
-                    <view class="conetns_left"
-                    >
-                        <view class="conetns_left_img"
+                     <navigator class="loginContent2_divNav" open-type="navigate" url="/pages/mycenter/notificationMessage">
+                        <view class="conetns_left"
                         >
-                            <image src="~@/static/CC_46.png" style="width: 30px; height: 30px;"></image>
+                            <view class="conetns_left_img"
+                            >
+                                <image src="~@/static/CC_46.png" style="width: 30px; height: 30px;"></image>
+                            </view>
+                            <view class="conetns_left_font">通知消息</view>
+                        </view
+                        >
+                        <view class="conetns_right"
+                        >
+                            <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
                         </view>
-                        <view class="conetns_left_font">通知消息</view>
-                    </view
-                    >
-                    <view class="conetns_right"
-                    >
-                        <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
-                    </view>
+                     </navigator>
                 </view>
                 <view class="loginContent2_div-line"></view>
                 <view class="loginContent2_div">
-                    <view class="conetns_left"
-                    >
-                        <view class="conetns_left_img"
+                     <navigator class="loginContent2_divNav" open-type="navigate" url="/pages/mycenter/aboutSystem">
+                        <view class="conetns_left"
                         >
-                            <image src="~@/static/CC_43.png" style="width: 30px; height: 30px;"></image>
+                            <view class="conetns_left_img"
+                            >
+                                <image src="~@/static/CC_43.png" style="width: 30px; height: 30px;"></image>
+                            </view>
+                            <view class="conetns_left_font">关于系统</view>
+                        </view
+                        >
+                        <view class="conetns_right"
+                        >
+                            <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
                         </view>
-                        <view class="conetns_left_font">关于系统</view>
-                    </view
-                    >
-                    <view class="conetns_right"
-                    >
-                        <image src="~@/static/CC_62.png" style="width: 10px; height: 10px;"></image>
-                    </view>
+                     </navigator>
                 </view>
             </view>
 
@@ -152,12 +163,13 @@
       z-index: -1 !important;
     }
     .content {
+        position: relative;
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         width: 100%;
-
         .loginContent {
             width: 100%;
             height: 120px;
@@ -198,17 +210,29 @@
             }
 
             .margin_left_10 {
-                margin-left: 15%;
+                margin-left: 10%;
                 display: flex;
+                .separator_text{
+                    padding: 0 10px;
+                }
+            }
+            .erse {
+                .UserName {
+                    font-weight: bold;
+                }
+                .usersex {
+                    display: inline-block;
+                    margin: 0 20upx;
+                }
             }
 
             .erse1 {
-                margin-left: 1%;
+                margin-left: 2%;
+                margin-right: 2%;
 
                 uni-image {
                     display: contents;
                 }
-
                 width: 10px;
                 height: 20px;
             }
@@ -231,9 +255,12 @@
             padding: 0 8px;
 
             .loginContent2_div {
-                margin: 10px 4px;
-                align-items: center;
+                margin: 18px 4px;
+
+            }
+            .loginContent2_divNav {
                 display: flex;
+                 align-items: center;
             }
 
             .conetns_left {

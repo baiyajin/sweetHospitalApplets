@@ -321,7 +321,16 @@ function isValidIP (ip) {
   return reg.test(ip)
 }
 
+function isPhone(phone){
+  if ((/^1[3456789]\d{9}$/.test(phone))) {
+    return true
+  }else{
+    return false
+  }
+}
+
 module.exports = {
+  isPhone,
   returnColor,
   compileStr,
   uncompileStr,

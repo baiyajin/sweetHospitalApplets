@@ -26,4 +26,9 @@
         transform: translate(-50%, -50%);
         position: relative;
     }
+    /*处理chorme浏览器input记住密码后出现黄色背景的处理方法*/
+    :-webkit-autofill {
+        -webkit-text-fill-color: #fff !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
 </style>
