@@ -1,12 +1,13 @@
 <script>
+	import { authToken } from '@/utils/auth.js'
 	export default {
-		onLaunch: function() {
-			console.log('App Launch')
+		onLaunch () {
+			authToken()
 		},
-		onShow: function() {
+		onShow () {
 			console.log('App Show')
 		},
-		onHide: function() {
+		onHide () {
 			console.log('App Hide')
 		}
 	}

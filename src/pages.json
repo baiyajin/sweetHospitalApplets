@@ -3,7 +3,11 @@
 		{"path": "pages/index/index"},
 		{"path": "pages/mycenter/index"},
 		{"path": "pages/eyeSelfTest/index"},
-		{"path": "pages/mycenter/regster"}
+		{"path": "pages/mycenter/regster"},
+		{ "path": "pages/mycenter/login" },
+		{ "path": "pages/mycenter/manage" },
+		{ "path": "pages/webview/index" },
+		{ "path": "pages/eyeSelfTest/scop" }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

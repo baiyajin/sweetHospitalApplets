@@ -3,36 +3,44 @@
 		<view>
 			<image class="padding_top_bottom_10" mode="widthFix" src="~@/static/CC_10.png"></image>
 		</view>
-		<view>
+		<view style="position: relative;width: 100%;">
 			<swiper
-					:style="{width: width + 'px'}"
-					class="swiper"
-					:indicator-dots="indicatorDots"
-					indicator-color="white"
-					indicator-active-color="#00adaf"
-					:autoplay="autoplay"
-					:interval="interval"
-					:duration="duration">
-				<swiper-item>
-					<image class="ele_center" mode="aspectFit" src="~@/static/CC_13.jpg"></image>
+				class="swiper"
+				:indicator-dots="indicatorDots"
+				indicator-color="white"
+				indicator-active-color="#00adaf"
+				:autoplay="autoplay"
+				:interval="interval"
+				:duration="duration">
+				<swiper-item @tap.stop="handDetail(1)">
+					<image class="ele_center" mode="aspectFit" src="~@/static/benner_01.png"></image>
 				</swiper-item>
-				<swiper-item>
-					<image class="ele_center" mode="aspectFit" src="~@/static/CC_13.jpg"></image>
-				</swiper-item>
-				<swiper-item>
-					<image class="ele_center" mode="aspectFit" src="~@/static/CC_13.jpg"></image>
+				<swiper-item @tap.stop="handDetail(2)">
+					<image class="ele_center" mode="aspectFit" src="~@/static/benner_02.png"></image>
 				</swiper-item>
 			</swiper>
 		</view>
 		<view class="uni-flex padding_top_bottom_10">
 			<view class="uni-flex-item" style="width: 150px">
-				<image class="image_view ele_center" style="width: 80px;height:80px;" src="~@/static/CC_23.png"></image>
+				<image class="image_view ele_center" style="width: 80px;height:70px;" src="~@/static/CC_23.png"></image>
 			</view>
-			<view class="uni-flex-item">
+			<view class="uni-flex-item" v-if="message.length">
 				<view v-for="(i, d) in message" :key="d" class="list_view">
 					<view class="status_view" v-if="!(d%2)"></view>
 					<view class="title">{{i.title}}</view>
 					<view class="content">{{i.content}}</view>
+				</view>
+			</view>
+			<view class="uni-flex-item" v-else>
+				<view v-for="(i, d) in message2" :key="d" class="list_view">
+					<view class="title">{{i.title}}</view>
+					<view class="content no_data">{{i.content}}</view>
+				</view>
+			</view>
+			<view class="all_div">
+				<view class="ele_center">
+					<image class="image_view" src="~@/static/CC_29.png"></image>
+					<view class="text_view">全部</view>
 				</view>
 			</view>
 		</view>
@@ -41,7 +49,7 @@
 			<view class="title_view2">日常预治小知识</view>
 		</view>
 		<view class="bottom_view">
-			<view class="content_view" v-for="(item, index) in content" :key="index">
+			<view class="content_view" v-for="(item, index) in content" @tap="handDetail(index + 3)" :key="index">
 				<view class="circle"></view>
 				<view class="title_view3">{{item}}</view>
 			</view>
@@ -54,42 +62,44 @@
 		data() {
 			return {
 				message: [
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊进行复诊复诊'},
-					{title: '日常护理', content: '要御寒保暖，保护身体，免受免受'},
-					{title: '日常护理', content: '洗脸时注意眼睑及睫毛之清洁，用，用'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
-					{title: '日常护理', content: '洗脸时注意眼睑及睫毛之清洁，用，用'}
+					// {title: '复诊提醒', content: '2020年12月20日需进行复诊复诊进行复诊复诊'},
+					// {title: '日常护理', content: '要御寒保暖，保护身体，免受免受'},
+					// {title: '日常护理', content: '洗脸时注意眼睑及睫毛之清洁，用，用'},
+					// {title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
+					// {title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
+					// {title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
+					// {title: '复诊提醒', content: '2020年12月20日需进行复诊复诊'},
+					// {title: '日常护理', content: '洗脸时注意眼睑及睫毛之清洁，用，用'}
+				],
+				message2: [
+					{title: '复诊提醒', content: '暂无提醒'},
+					{title: '日常护理', content: '暂无提醒'}
 				],
 				content: [
-						'老花镜不能随便在路边买，和近视眼镜一样，要验光验配？',
-						'做了近视手术后，就不能再做其他的眼睛手术了？',
-						'角膜太薄，做不了近视激光手术，只能戴眼镜？',
-						'得糖尿病久了，可能会失明？',
-						'角膜移植和其他器官一样需要配对吗？',
-						'散光只能戴眼镜，不能做手术矫正？',
-					'老花镜不能随便在路边买，和近视眼镜一样，要验光验配？',
-					'做了近视手术后，就不能再做其他的眼睛手术了？',
-					'角膜太薄，做不了近视激光手术，只能戴眼镜？',
-					'得糖尿病久了，可能会失明？',
-					'角膜移植和其他器官一样需要配对吗？',
-					'散光只能戴眼镜，不能做手术矫正？'
+						'你知道吗? 眼睑也有螨虫~',
+						'“睛”神漫画 | 干眼症会影响视力吗？',
+						'『干眼症』不只是眼干这么简单',
+						'我国蠕形螨睑缘炎诊断和治疗专家共识',
+						'提醒丨秋季干眼症频发 欲哭“无泪”！',
 				],
 				width: 0,
 				indicatorDots: true,
-				autoplay: true,
+				autoplay: false,
 				interval: 2000,
 				duration: 500
 			}
 		},
-		onLoad() {
+		async onLoad() {
 			this.width = document.body.clientWidth
 		},
 		methods: {
 			computedWidth (px) {
 				return `calc(${this.width}px - ${px})`
+			},
+			handDetail (type) {
+				uni.navigateTo({
+					url: `/pages/webview/index?type=${type}`
+				})
 			}
 		}
 	}
@@ -101,25 +111,34 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		.common_div{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
 		.swiper{
-			height: 90px;
+			width: 100%;
 			/deep/.uni-swiper-dot-active{
 				border: 2px solid white;
+			}
+			/deep/.uni-swiper-dots{
+				bottom: 20%;
+			}
+			.ele_center{
+				width: 100%;
 			}
 		}
 		.uni-flex{
 			display: flex;
-			width: 92%;
+			width: 100%;
 			.uni-flex-item{
-				width: 100%;
+				width: 80%;
 				height: 120px;
 				overflow: auto;
-				.image_view{
-				}
 				.list_view{
 					font-size: 15px;
 					display: flex;
-					margin: 5px 0 5px 10px;
+					margin: 8% 0 8% 10px;
 					position: relative;
 					.status_view{
 						width: 10px;
@@ -147,6 +166,28 @@
 						white-space:nowrap;
 						overflow:hidden;
 						text-overflow:ellipsis;
+					}
+					.no_data{
+						color: gray;
+					}
+				}
+			}
+			.all_div{
+				width: 20%;
+				height: 120px;
+				z-index: 9;
+				position: relative;
+				.ele_center{
+					.image_view{
+						left: 50%;
+						transform: translate(-50%, 0);
+						width: 28px;
+						height: 16px;
+					}
+					.text_view{
+						text-align: center;
+						font-size: 16px;
+						color: #00adaf;
 					}
 				}
 			}
