@@ -138,7 +138,7 @@
 				.list_view{
 					font-size: 15px;
 					display: flex;
-					margin: 8% 0 8% 10px;
+					margin: 10% 0 10% 10px;
 					position: relative;
 					.status_view{
 						width: 10px;

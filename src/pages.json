@@ -13,6 +13,7 @@
 		{ "path": "pages/mycenter/messageDetail" }
 	],
 	"globalStyle": {
+		"navigationStyle": "custom",
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "云南省干眼中心智能服务平台",
 		"navigationBarBackgroundColor": "#00adaf",

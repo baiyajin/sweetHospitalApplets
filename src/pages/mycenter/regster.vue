@@ -30,6 +30,10 @@
 				<text class="title">手 机 号：</text>
 				<input type="text" focus clearable v-model="sufferPhone" @input="checkPhone" placeholder="请输入手机号" />
 			</view>
+			<!--<view class="input-row border">
+				<text class="title">门 诊 号：</text>
+				<input type="text" focus clearable v-model="sufferPhone" @input="checkPhone" placeholder="请输入门诊号" />
+			</view>-->
 
 		</view>
 		<view class="btn-row">
@@ -143,6 +147,11 @@
 					font-size: 16px;
 					font-weight: bold;
 					width: 30%;
+					::before{
+						content: "*";
+						color: #f56c6c;
+						margin-right: 4px;
+					}
 				}
 				input, uni-picker{
 					width: 70%;
